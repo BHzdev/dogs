@@ -14,8 +14,8 @@ const useForm = (type) => {
 
   function validate(value) {
     if (type === false) return true;
-    if (value.lenght === 0) {
-      setError('Preencha um valor');
+    if (value.length === 0) {
+      setError('Preencha um valor.');
       return false;
     } else if (types[type] && !types[type].regex.test(value)) {
       setError(types[type].message);
@@ -27,6 +27,7 @@ const useForm = (type) => {
   }
 
   function onChange({ target }) {
+    if (error) validate(target.value);
     setValue(target.value);
   }
 
@@ -34,7 +35,9 @@ const useForm = (type) => {
     value,
     setValue,
     onChange,
+    error,
     validate: () => validate(value),
+    onBlur: () => validate(value),
   };
 };
 
