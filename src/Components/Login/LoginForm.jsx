@@ -9,6 +9,13 @@ const LoginForm = () => {
   const username = useForm();
   const password = useForm();
 
+  React.useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      getUser();
+    }
+  }, []);
+
   async function getUser(token) {
     const { url, options } = USER_GET(token);
     const response = await fetch(url, options);
