@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TOKEN_POST } from '../../api';
 import useForm from '../../Hooks/useForm';
 import Button from '../Forms/Button';
 import Input from '../Forms/Input';
+import { TOKEN_POST, USER_GET } from '../../api';
 
 const LoginForm = () => {
   const username = useForm();
