@@ -9,6 +9,15 @@ export const UserStorage = ({ children }) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
+  React.useEffect(() => {
+    async function autoLogin() {
+      const token = window.localStorage.getItem('token');
+      if (token) {
+      }
+    }
+    autoLogin();
+  }, []);
+
   async function getUser(token) {
     const { url, options } = USER_GET(token);
     const response = await fetch(url, options);
