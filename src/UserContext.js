@@ -11,28 +11,17 @@ export const UserStorage = ({ children }) => {
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    async function autoLogin() {
-      const token = window.localStorage.getItem('token');
-      if (token) {
-        try {
-          setError(null);
-          setLoading(true);
-          const { url, options } = TOKEN_VALIDATE_POST(token);
-          const response = await fetch(url, options);
-          if (!response.ok) {
-            throw new Error('Token inválido');
-          }
-          await getUser(token);
-        } catch (err) {
-          userLogout();
-        } finally {
-          setLoading(false);
-        }
-      }
-    }
-    autoLogin();
-  }, []);
+  const userLogout = React.useCallback(
+    async function () {
+      setData(null);
+      setError(null);
+      setLoading(null);
+      setLogin(null);
+      window.localStorage.removeItem('token');
+      navigate('/login');
+    },
+    [navigate],
+  );
 
   async function getUser(token) {
     const { url, options } = USER_GET(token);
@@ -63,14 +52,28 @@ export const UserStorage = ({ children }) => {
     }
   }
 
-  async function userLogout() {
-    setData(null);
-    setError(null);
-    setLoading(null);
-    setLogin(null);
-    window.localStorage.removeItem('token');
-    navigate('/login');
-  }
+  React.useEffect(() => {
+    async function autoLogin() {
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        try {
+          setError(null);
+          setLoading(true);
+          const { url, options } = TOKEN_VALIDATE_POST(token);
+          const response = await fetch(url, options);
+          if (!response.ok) {
+            throw new Error('Token inválido');
+          }
+          await getUser(token);
+        } catch (err) {
+          userLogout();
+        } finally {
+          setLoading(false);
+        }
+      }
+    }
+    autoLogin();
+  }, [userLogout]);
 
   return (
     <UserContext.Provider
