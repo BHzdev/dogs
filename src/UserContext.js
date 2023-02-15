@@ -38,15 +38,26 @@ export const UserStorage = ({ children }) => {
     const json = await response.json();
     setData(json);
     setLogin(true);
-    console.log(json);
   }
 
   async function userLogin(username, password) {
-    const { url, options } = TOKEN_POST({ username, password });
-    const tokenRes = await fetch(url, options);
-    const { token } = await tokenRes.json();
-    window.localStorage.setItem('token', token);
-    getUser(token);
+    try {
+      setError(null);
+      setLoading(true);
+      const { url, options } = TOKEN_POST({ username, password });
+      const tokenRes = await fetch(url, options);
+      if (!tokenRes.ok) {
+        throw new Error(`Error: ${tokenRes.statusText}`);
+      }
+      const { token } = await tokenRes.json();
+      window.localStorage.setItem('token', token);
+      await getUser(token);
+    } catch (err) {
+      setError(err.message);
+      setLogin(false);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function userLogout() {
@@ -58,7 +69,9 @@ export const UserStorage = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ userLogin, userLogout, data }}>
+    <UserContext.Provider
+      value={{ userLogin, userLogout, data, error, loading, login }}
+    >
       {children}
     </UserContext.Provider>
   );
