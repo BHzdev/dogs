@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import useForm from '../../Hooks/useForm';
 import Button from '../Forms/Button';
 import Input from '../Forms/Input';
-import { TOKEN_POST, USER_GET } from '../../api';
 import { UserContext } from '../../UserContext';
 
 const LoginForm = () => {
