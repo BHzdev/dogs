@@ -23,6 +23,7 @@ export const UserStorage = ({ children }) => {
           }
           await getUser(token);
         } catch (err) {
+          userLogout();
         } finally {
           setLoading(false);
         }
@@ -48,8 +49,16 @@ export const UserStorage = ({ children }) => {
     getUser(token);
   }
 
+  async function userLogout() {
+    setData(null);
+    setError(null);
+    setLoading(null);
+    setLogin(null);
+    window.localStorage.removeItem('token');
+  }
+
   return (
-    <UserContext.Provider value={{ userLogin, data }}>
+    <UserContext.Provider value={{ userLogin, userLogout, data }}>
       {children}
     </UserContext.Provider>
   );
