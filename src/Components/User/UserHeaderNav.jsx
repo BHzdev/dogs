@@ -11,6 +11,9 @@ const UserHeaderNav = () => {
   const [mobile, setMobile] = React.useState(null);
   const { userLogout } = React.useContext(UserContext);
 
+  const { matches } = window.matchMedia('(max-width: 40rem)');
+  console.log(matches);
+
   return (
     <nav className={styles.nav}>
       <NavLink to="/conta" end>
