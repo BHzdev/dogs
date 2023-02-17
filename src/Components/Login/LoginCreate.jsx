@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../Forms/Input';
 import Button from '../Forms/Button';
+import Error from '../Helper/Error';
 import useForm from '../../Hooks/useForm';
 import { USER_POST } from '../../api';
 import { UserContext } from '../../UserContext';
@@ -32,7 +33,12 @@ const LoginCreate = () => {
         <Input label="Usuário" type="text" name="username" {...username} />
         <Input label="Email" type="email" name="email" {...email} />
         <Input label="Senha" type="password" name="password" {...password} />
-        <Button>Cadastrar</Button>
+        {loading ? (
+          <Button disabled>Cadastrando...</Button>
+        ) : (
+          <Button>Cadastrar</Button>
+        )}
+        <Error error={error} />
       </form>
     </section>
   );
