@@ -6,13 +6,11 @@ import { ReactComponent as Estatisticas } from '../../Assets/estatisticas.svg';
 import { ReactComponent as AdicionarFoto } from '../../Assets/adicionar.svg';
 import { ReactComponent as Sair } from '../../Assets/sair.svg';
 import styles from './UserHeaderNav.module.css';
+import useMedia from '../../Hooks/useMedia';
 
 const UserHeaderNav = () => {
-  const [mobile, setMobile] = React.useState(null);
   const { userLogout } = React.useContext(UserContext);
-
-  const { matches } = window.matchMedia('(max-width: 40rem)');
-  console.log(matches);
+  const mobile = useMedia('(max-width: 40rem)');
 
   return (
     <nav className={styles.nav}>
