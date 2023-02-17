@@ -22,6 +22,7 @@ const Header = () => {
               Login / Criar
             </Link>
           )}
+          <button onClick={userLogout}>Sair</button>
         </nav>
       </header>
     </div>
