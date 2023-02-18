@@ -1,9 +1,17 @@
 import React from 'react';
 import styles from './UserPhotoPost.module.css';
+import useForm from '../../Hooks/useForm';
+import useFetch from '../../Hooks/useFetch';
 import Input from '../Forms/Input';
 import Button from '../Forms/Button';
 
 const UserPhotoPost = () => {
+  const nome = useForm();
+  const peso = useForm('number');
+  const idade = useForm('number');
+  const [img, setImg] = React.useState({});
+  const { data, error, loading, request } = useFetch();
+
   function handleSubmit(event) {
     event.preventDefault();
   }
