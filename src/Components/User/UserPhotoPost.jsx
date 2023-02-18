@@ -5,6 +5,7 @@ import useFetch from '../../Hooks/useFetch';
 import Input from '../Forms/Input';
 import Button from '../Forms/Button';
 import { PHOTO_POST } from '../../api';
+import Error from '../Helper/Error';
 
 const UserPhotoPost = () => {
   const nome = useForm();
@@ -32,6 +33,7 @@ const UserPhotoPost = () => {
       raw: target.files[0],
     });
   }
+
   return (
     <section className={`${styles.photoPost} animeLeft`}>
       <form onSubmit={handleSubmit}>
@@ -45,7 +47,12 @@ const UserPhotoPost = () => {
           id="img"
           onChange={handleImgChange}
         />
-        <Button>Enviar</Button>
+        {loading ? (
+          <Button disabled>Enviando...</Button>
+        ) : (
+          <Button>Enviar</Button>
+        )}
+        <Error error={error} />
       </form>
       <div>
         {img.preview && (
