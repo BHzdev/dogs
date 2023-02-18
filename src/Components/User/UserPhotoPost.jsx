@@ -14,9 +14,18 @@ const UserPhotoPost = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append('img', img.raw);
+    formData.append('nome', nome.value);
+    formData.append('peso', peso.value);
+    formData.append('idade', idade.value);
   }
 
-  function handleImgChange() {}
+  function handleImgChange({ target }) {
+    setImg({
+      raw: target.files[0],
+    });
+  }
   return (
     <section className={`${styles.photoPost} animeLeft`}>
       <form onSubmit={handleSubmit}>
