@@ -1,4 +1,5 @@
 import React from 'react';
+import { PHOTO_GET } from '../../api';
 import useFetch from '../../Hooks/useFetch';
 import styles from './FeedModal.module.css';
 
