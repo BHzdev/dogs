@@ -4,9 +4,11 @@ import FeedPhotos from './FeedPhotos';
 
 const Feed = ({ user }) => {
   const [modalPhoto, setModalPhoto] = React.useState(null);
+  const [pages, setPages] = React.useState([1]);
 
   React.useEffect(() => {
     function infiniteScroll(event) {
+      setPages((pages) => [...pages, pages.length + 1]);
       console.log(event);
     }
     window.addEventListener('wheel', infiniteScroll);
@@ -21,7 +23,14 @@ const Feed = ({ user }) => {
       {modalPhoto && (
         <FeedModal photo={modalPhoto} setModalPhoto={setModalPhoto} />
       )}
-      <FeedPhotos user={user} setModalPhoto={setModalPhoto} />
+      {pages.map((page) => (
+        <FeedPhotos
+          key={page}
+          user={user}
+          page={page}
+          setModalPhoto={setModalPhoto}
+        />
+      ))}
     </div>
   );
 };
