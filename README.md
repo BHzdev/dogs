@@ -41,7 +41,7 @@ Gráficos: A aplicação utiliza a biblioteca Victory para criar gráficos com i
 > react-router-dom /
 > victory / 
 > PHP /
-> Wordpress /
+> Wordpress
 
 ## Repositório da REST API
 `https://github.com/BHzdev/Rest-API-Dogs`
