@@ -32,8 +32,6 @@ Feed de notícias: Exibe as publicações de todos os perfis que o usuário segu
 
 Publicação de fotos e comentários: Os usuários podem publicar fotos e comentários em seu próprio perfil ou no perfil de outros cachorros.
 
-Eventos: Permite aos usuários criar eventos e convidar outros perfis de cachorros.
-
 Gráficos: A aplicação utiliza a biblioteca Victory para criar gráficos com informações sobre os cachorros cadastrados.
 
 ## Tecnologias utilizadas
