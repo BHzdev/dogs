@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import LoginCreate from "./LoginCreate";
 import LoginPasswordLost from "./LoginPasswordLost";
@@ -7,10 +7,12 @@ import LoginPasswordReset from "./LoginPasswordReset";
 import styles from "./Login.module.css";
 import NotFound from "../NotFound";
 import { useSelector } from "react-redux";
+import Loading from "../Helper/Loading";
 
 const Login = () => {
-  const { data } = useSelector((state) => state.user);
+  const { data, loading } = useSelector((state) => state.user);
 
+  if (loading) return <Loading />;
   if (data) return <Navigate to="/conta" />;
   return (
     <section className={styles.login}>

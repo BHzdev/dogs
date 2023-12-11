@@ -2,14 +2,14 @@ import React from "react";
 import styles from "./PhotoContent.module.css";
 import { Link } from "react-router-dom";
 import PhotoComments from "./PhotoComments";
-import { UserContext } from "../../UserContext";
 import PhotoDelete from "./PhotoDelete";
 import Image from "../Helper/Image";
 import { useSelector } from "react-redux";
 
-const PhotoContent = ({ data, single }) => {
-  const user = React.useContext(UserContext);
+const PhotoContent = ({ single }) => {
+  const { user } = useSelector((state) => state);
   const { photo, comments } = useSelector((state) => state.photo.data);
+
   return (
     <div className={`${styles.photo} ${single ? styles.single : ""}`}>
       <div className={styles.img}>
@@ -34,7 +34,7 @@ const PhotoContent = ({ data, single }) => {
           </ul>
         </div>
       </div>
-      <PhotoComments id={photo.id} comments={comments} single={single} />
+      <PhotoComments single={single} id={photo.id} comments={comments} />
     </div>
   );
 };
